@@ -3,7 +3,7 @@ public class TicTacToeGame
 {
 	public static char [] board=new char[10];
 	char computerLetter,playerLetter;
-	int i,move;/*move variable used to locate the cell in the board */
+	int i,move=0;/*move variable used to locate the cell in the board */
 	Scanner reader=new Scanner(System.in);
 	void initialize()/*To initialize the game board*/
 	{
@@ -44,9 +44,22 @@ public class TicTacToeGame
 		System.out.println("Enter desired location to make a move:");
 		move=reader.nextInt();
 		if(move>0 && move<(board.length))/*The board value will range in between 1 to N-1 where here the N is 10*/
+		{
 			System.out.println("Desired location:"+move+" exists on board");
+			availableSpace(move);
+		}
 		else
 			System.out.println("Please enter a location which exists in range of 1 to "+(board.length-1));
+	}
+	void availableSpace(int location)/*Stuck at use case 5*/
+	{
+		if(board[location]!='X' || board[location]!='O')
+		{
+			System.out.println("Free space available");
+			//board[move]=The character to be added
+		}
+		else
+			System.out.println("Free space not available");
 	}
 	public static void main(String[] args) 
 	{
@@ -55,5 +68,6 @@ public class TicTacToeGame
 		new_game.choose_Letter();
 		new_game.showBoard();
 		new_game.selectDesiredLocation();
+		//new_game.availableSpace();
 	}
 }
