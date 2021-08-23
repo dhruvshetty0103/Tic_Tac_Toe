@@ -39,7 +39,7 @@ public class TicTacToeGame
 			System.out.println("-+-+-");
 		}
 	}
-	void selectDesiredLocation()
+	void selectDesiredLocation()/*Displaying whether the desired location or index exists on board*/
 	{
 		System.out.println("Enter desired location to make a move:");
 		move=reader.nextInt();
