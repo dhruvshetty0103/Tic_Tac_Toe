@@ -3,6 +3,13 @@ public class TicTacToeGame
 {
 	public static char [] board=new char[10];
 	char computerLetter,playerLetter;
+	int i;
+	void initialize()/*To initialize the game board*/
+	{
+		System.out.println("Welcome to TicTacToe");
+		for(i=1;i<board.length;i++)
+			board[i]=' ';
+	}
 	void choose_Letter()/*Function to assign letter to player and computer*/
 	{
 		System.out.println("Choose letter X or O for player");
@@ -23,16 +30,20 @@ public class TicTacToeGame
 			System.out.println("Please enter either X or O other letter are not allowed");
 		reader.close();
 	}
-	void initialize()/*To initialize the game board*/
+	void showBoard()
 	{
-		System.out.println("Welcome to TicTacToe");
-		for(int i=1;i<board.length;i++)
-			board[i]=' ';
+		for(i=1;i<Math.sqrt(board.length);i++)
+		{
+			System.out.println(board[i]+"|"+board[i+1]+"|"+board[i+2]);
+			System.out.println("-+-+-");
+		}
 	}
+	
 	public static void main(String[] args) 
 	{
 		TicTacToeGame new_game=new TicTacToeGame();
 		new_game.initialize();
 		new_game.choose_Letter();
+		new_game.showBoard();
 	}
 }
