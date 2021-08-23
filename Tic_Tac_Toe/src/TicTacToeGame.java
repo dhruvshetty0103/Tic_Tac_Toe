@@ -30,11 +30,11 @@ public class TicTacToeGame
 			System.out.println("Please enter either X or O other letter are not allowed");
 		reader.close();
 	}
-	void showBoard()
+	void showBoard()/*Displaying current board*/
 	{
-		for(i=1;i<Math.sqrt(board.length);i++)
+		for(i=1;i<Math.sqrt(board.length);i++)//Taking a square root will help us to display NxN matrix
 		{
-			System.out.println(board[i]+"|"+board[i+1]+"|"+board[i+2]);
+			System.out.println(board[i]+"|"+board[i+1]+"|"+board[i+2]);/*This will help us to iterate all elements in a current row*/
 			System.out.println("-+-+-");
 		}
 	}
