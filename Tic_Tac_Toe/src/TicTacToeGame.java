@@ -3,7 +3,8 @@ public class TicTacToeGame
 {
 	public static char [] board=new char[10];
 	char computerLetter,playerLetter;
-	int i;
+	int i,move;/*move variable used to locate the cell in the board */
+	Scanner reader=new Scanner(System.in);
 	void initialize()/*To initialize the game board*/
 	{
 		System.out.println("Welcome to TicTacToe");
@@ -13,7 +14,7 @@ public class TicTacToeGame
 	void choose_Letter()/*Function to assign letter to player and computer*/
 	{
 		System.out.println("Choose letter X or O for player");
-		Scanner reader=new Scanner(System.in);
+		
 		System.out.println("Enter player letter:");
 		playerLetter=reader.next().charAt(0);
 		if(playerLetter=='X' || playerLetter=='x')/*Doing this to avoid case sensitivity */
@@ -28,7 +29,7 @@ public class TicTacToeGame
 		}
 		else
 			System.out.println("Please enter either X or O other letter are not allowed");
-		reader.close();
+		
 	}
 	void showBoard()/*Displaying current board*/
 	{
@@ -38,12 +39,21 @@ public class TicTacToeGame
 			System.out.println("-+-+-");
 		}
 	}
-	
+	void selectDesiredLocation()
+	{
+		System.out.println("Enter desired location to make a move:");
+		move=reader.nextInt();
+		if(move>0 && move<(board.length))/*The board value will range in between 1 to N-1 where here the N is 10*/
+			System.out.println("Desired location:"+move+" exists on board");
+		else
+			System.out.println("Please enter a location which exists in range of 1 to "+(board.length-1));
+	}
 	public static void main(String[] args) 
 	{
 		TicTacToeGame new_game=new TicTacToeGame();
 		new_game.initialize();
 		new_game.choose_Letter();
 		new_game.showBoard();
+		new_game.selectDesiredLocation();
 	}
 }
