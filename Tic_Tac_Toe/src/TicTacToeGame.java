@@ -2,7 +2,7 @@
 public class TicTacToeGame 
 {
 	public static char [] board=new char[10];
-	static void initialize()
+	static void initialize()/*To initialize the game board*/
 	{
 		System.out.println("Welcome to TicTacToe");
 		for(int i=1;i<board.length;i++)
@@ -10,6 +10,7 @@ public class TicTacToeGame
 	}
 	public static void main(String[] args) 
 	{
-		initialize();
+		TicTacToeGame new_game=new TicTacToeGame();
+		new_game.initialize();
 	}
 }
