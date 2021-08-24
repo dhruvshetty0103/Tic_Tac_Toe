@@ -51,12 +51,13 @@ public class TicTacToeGame
 		else
 			System.out.println("Please enter a location which exists in range of 1 to "+(board.length-1));
 	}
-	void availableSpace(int location)/*Stuck at use case 5*/
+	void availableSpace(int location)/*Where free space is available insert letter*/
 	{
-		if(board[location]!='X' || board[location]!='O')
+		if(board[location]!='X' || board[location]!='O')//When these spaces are not occupied by any letter
 		{
 			System.out.println("Free space available");
-			//board[move]=The character to be added
+			board[move]=playerLetter;
+			showBoard();/*Showing board to check whether it is working or not*/
 		}
 		else
 			System.out.println("Free space not available");
