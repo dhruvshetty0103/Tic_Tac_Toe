@@ -33,7 +33,7 @@ public class TicTacToeGame
 	}
 	void showBoard()/*Displaying current board*/
 	{
-		for(i=1;i<Math.sqrt(board.length);i++)//Taking a square root will help us to display NxN matrix
+		for(i=1;i<board.length;i=i+3)//Taking a length and adding 3 to i value display NxN matrix
 		{
 			System.out.println(board[i]+"|"+board[i+1]+"|"+board[i+2]);/*This will help us to iterate all elements in a current row*/
 			System.out.println("-+-+-");
@@ -51,12 +51,13 @@ public class TicTacToeGame
 		else
 			System.out.println("Please enter a location which exists in range of 1 to "+(board.length-1));
 	}
-	void availableSpace(int location)/*Stuck at use case 5*/
+	void availableSpace(int location)/*Where free space is available insert letter*/
 	{
-		if(board[location]!='X' || board[location]!='O')
+		if(board[location]!='X' || board[location]!='O')//When these spaces are not occupied by any letter
 		{
 			System.out.println("Free space available");
-			//board[move]=The character to be added
+			board[move]=playerLetter;
+			showBoard();/*Showing board to check whether it is working or not*/
 		}
 		else
 			System.out.println("Free space not available");
