@@ -32,7 +32,7 @@ public class TicTacToeGame
 	}
 	void showBoard()/*Displaying current board*/
 	{
-		for(i=1;i<Math.sqrt(board.length);i++)//Taking a square root will help us to display NxN matrix
+		for(i=1;i<board.length;i=i+3)//Taking a length and adding 3 to i value display NxN matrix
 		{
 			System.out.println(board[i]+"|"+board[i+1]+"|"+board[i+2]);/*This will help us to iterate all elements in a current row*/
 			System.out.println("-+-+-");
