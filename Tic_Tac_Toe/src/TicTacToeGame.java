@@ -55,7 +55,7 @@ public class TicTacToeGame
 	
 	void selectDesiredLocation()/*Displaying whether the desired location or index exists on board*/
 	{
-		while(count<=9)
+		while(count<9)
 		{
 			
 			System.out.println(turn+" chance enter desired location to make a move:");
@@ -75,18 +75,18 @@ public class TicTacToeGame
 	
 	void availableSpace(int location)/*Where free space is available insert letter*/
 	{
-		if(turn=="Player")
+		if(board[location]!='X' && board[location]!='O')//When these spaces are not occupied by any letter
 		{
-			insertLetter=playerLetter;
-			turn="Computer";//Setting next turn to computer
-		}
-		else
-		{
-			insertLetter=computerLetter;
-			turn="Player";//Setting next turn to player
-		}
-		if(board[location]!='X' || board[location]!='O')//When these spaces are not occupied by any letter
-		{
+			if(turn=="Player")
+			{
+				insertLetter=playerLetter;
+				turn="Computer";//Setting next turn to computer
+			}
+			else
+			{
+				insertLetter=computerLetter;
+				turn="Player";//Setting next turn to player
+			}
 			System.out.println("Free space available");
 			board[move]=insertLetter;
 			count++;
