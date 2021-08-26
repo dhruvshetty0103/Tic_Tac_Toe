@@ -77,6 +77,9 @@ public class TicTacToeGame
 	{
 		if(board[location]!='X' && board[location]!='O')//When these spaces are not occupied by any letter
 		{
+			/*If any letter exits in the cell it won't allow to insert letter
+			 * not only that but also take care that turn of that player 
+			 * or computer is not lost */
 			if(turn=="Player")
 			{
 				insertLetter=playerLetter;
@@ -88,8 +91,8 @@ public class TicTacToeGame
 				turn="Player";//Setting next turn to player
 			}
 			System.out.println("Free space available");
-			board[move]=insertLetter;
-			count++;
+			board[move]=insertLetter;//When free space is found then the letter is insert in that
+			count++;//Updating that a cell is filled up
 			showBoard();/*Showing board to check whether it is working or not*/
 		}
 		else
