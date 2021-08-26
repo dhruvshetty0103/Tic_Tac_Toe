@@ -57,9 +57,19 @@ public class TicTacToeGame
 	{
 		while(count<9)
 		{
-			
-			System.out.println(turn+" chance enter desired location to make a move:");
-			move=reader.nextInt();
+			if(turn=="Player")//If turn is of player then ask him in which cell does he want to enter his letter
+			{
+				System.out.println(turn+" chance enter desired location to make a move:");
+				move=reader.nextInt();
+			}
+			else
+			{
+				move=(int)((Math.random()*(9 - 1)) + 1);
+				/*Here computer gets a randomly generated number in 
+				 * between 1 to 9 where 9 is maximum and 1 is minimum in the range
+				 */
+				System.out.println("Computer randomly choses to cell number:"+move);
+			}
 			if(move>0 && move<(board.length))/*The board value will range in between 1 to N-1 where here the N is 10*/
 			{
 				System.out.println("Desired location:"+move+" exists on board");
@@ -67,9 +77,11 @@ public class TicTacToeGame
 			}
 			else
 				System.out.println("Please enter a location which exists in range of 1 to "+(board.length-1));
+			/*Use case for to check that did anyone won for not */
+			checkWinning();
 		}
-		if(count==9)
-			System.out.println("Board is full so game over!");
+		if(count==9)//In course of game Tie the count reaches the limit 9 as all cells are filled up
+			System.out.println("Board is full so game is Tie!");
 	}
 	
 	
@@ -105,7 +117,6 @@ public class TicTacToeGame
 		System.out.println("Choose the side of the coin for toss\nEnter\n0.Heads\n1.Tails");
 		int sideSelection=reader.nextInt();//Reading player choice for coin side
 		int tossResult=rand.nextInt(2);//Generating random number to decide result of toss
-		//reader.close();
 		if(tossResult==sideSelection)//If the result of toss is in favor of player he gets turn for the first insert
 		{
 			System.out.println("It's player turn first");
@@ -118,6 +129,86 @@ public class TicTacToeGame
 		}
 	}
 	
+	void checkWinning()
+	{
+		/*We know pattern of winning are as follows if they have
+		 * same letters at following indices 
+		 * 123
+		 * 147
+		 * 159
+		 * 258
+		 * 369
+		 * 357
+		 * 456
+		 * 789 
+		 * So basically if letter are equal and are equal to either
+		 * playerLetter or computerLetter then we get or winner
+		 * and we stop the game*/
+		if(board[1]==board[2] && board[2]==board[3] &&(board[1]==playerLetter||board[1]==computerLetter) )
+		{
+			if(board[1]==playerLetter)
+				System.out.println("Player won with letter:"+playerLetter);
+			else
+				System.out.println("Computer won with lettter:"+computerLetter);
+			System.exit(0);
+		}
+		if(board[1]==board[4] && board[4]==board[7] &&(board[1]==playerLetter||board[1]==computerLetter))
+		{
+			if(board[1]==playerLetter)
+				System.out.println("Player won with letter:"+playerLetter);
+			else
+				System.out.println("Computer won with lettter:"+computerLetter);
+			System.exit(0);
+		}
+		if(board[1]==board[5] && board[5]==board[9] &&(board[1]==playerLetter||board[1]==computerLetter))
+		{
+			if(board[1]==playerLetter)
+				System.out.println("Player won with letter:"+playerLetter);
+			else
+				System.out.println("Computer won with lettter:"+computerLetter);
+			System.exit(0);
+		}
+		if(board[2]==board[5] && board[5]==board[8] &&(board[2]==playerLetter||board[2]==computerLetter))
+		{
+			if(board[2]==playerLetter)
+				System.out.println("Player won with letter:"+playerLetter);
+			else
+				System.out.println("Computer won with lettter:"+computerLetter);
+			System.exit(0);
+		}
+		if(board[3]==board[6] && board[6]==board[9]&&(board[3]==playerLetter||board[3]==computerLetter))
+		{
+			if(board[3]==playerLetter)
+				System.out.println("Player won with letter:"+playerLetter);
+			else
+				System.out.println("Computer won with lettter:"+computerLetter);
+			System.exit(0);
+		}
+		if(board[3]==board[5] && board[5]==board[7]&&(board[3]==playerLetter||board[3]==computerLetter))
+		{
+			if(board[3]==playerLetter)
+				System.out.println("Player won with letter:"+playerLetter);
+			else
+				System.out.println("Computer won with lettter:"+computerLetter);
+			System.exit(0);
+		}
+		if(board[4]==board[5] && board[5]==board[6]&&(board[4]==playerLetter||board[4]==computerLetter))
+		{
+			if(board[4]==playerLetter)
+				System.out.println("Player won with letter:"+playerLetter);
+			else
+				System.out.println("Computer won with lettter:"+computerLetter);
+			System.exit(0);
+		}
+		if(board[7]==board[8] && board[8]==board[9]&&(board[7]==playerLetter||board[7]==computerLetter))
+		{
+			if(board[7]==playerLetter)
+				System.out.println("Player won with letter:"+playerLetter);
+			else
+				System.out.println("Computer won with lettter:"+computerLetter);
+			System.exit(0);
+		}
+	}
 	
 	public static void main(String[] args) 
 	{
@@ -127,6 +218,5 @@ public class TicTacToeGame
 		new_game.showBoard();
 		new_game.toss();
 		new_game.selectDesiredLocation();
-		//new_game.availableSpace();
 	}
 }
