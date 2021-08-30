@@ -128,85 +128,53 @@ public class TicTacToeGame
 			turn="Computer";
 		}
 	}
-	
+	/*We know pattern of winning are as follows if they have
+	 * same letters at following indices 
+	 * 123
+	 * 147
+	 * 159
+	 * 258
+	 * 369
+	 * 357
+	 * 456
+	 * 789 
+	 * So basically if letter are equal and are equal to either
+	 * playerLetter or computerLetter then we get or winner
+	 * and we stop the game and taking a flag variable to show 
+	 * that game is won by someone and display the winner
+	 * with it's associated letter
+	 */
 	void checkWinning()
 	{
-		/*We know pattern of winning are as follows if they have
-		 * same letters at following indices 
-		 * 123
-		 * 147
-		 * 159
-		 * 258
-		 * 369
-		 * 357
-		 * 456
-		 * 789 
-		 * So basically if letter are equal and are equal to either
-		 * playerLetter or computerLetter then we get or winner
-		 * and we stop the game*/
+		int flag=0;
 		if(board[1]==board[2] && board[2]==board[3] &&(board[1]==playerLetter||board[1]==computerLetter) )
-		{
-			if(board[1]==playerLetter)
-				System.out.println("Player won with letter:"+playerLetter);
-			else
-				System.out.println("Computer won with lettter:"+computerLetter);
-			System.exit(0);
-		}
+			flag=1;
 		if(board[1]==board[4] && board[4]==board[7] &&(board[1]==playerLetter||board[1]==computerLetter))
-		{
-			if(board[1]==playerLetter)
-				System.out.println("Player won with letter:"+playerLetter);
-			else
-				System.out.println("Computer won with lettter:"+computerLetter);
-			System.exit(0);
-		}
+			flag=1;
 		if(board[1]==board[5] && board[5]==board[9] &&(board[1]==playerLetter||board[1]==computerLetter))
-		{
-			if(board[1]==playerLetter)
-				System.out.println("Player won with letter:"+playerLetter);
-			else
-				System.out.println("Computer won with lettter:"+computerLetter);
-			System.exit(0);
-		}
+			flag=1;
 		if(board[2]==board[5] && board[5]==board[8] &&(board[2]==playerLetter||board[2]==computerLetter))
-		{
-			if(board[2]==playerLetter)
-				System.out.println("Player won with letter:"+playerLetter);
-			else
-				System.out.println("Computer won with lettter:"+computerLetter);
-			System.exit(0);
-		}
+			flag=1;
 		if(board[3]==board[6] && board[6]==board[9]&&(board[3]==playerLetter||board[3]==computerLetter))
-		{
-			if(board[3]==playerLetter)
-				System.out.println("Player won with letter:"+playerLetter);
-			else
-				System.out.println("Computer won with lettter:"+computerLetter);
-			System.exit(0);
-		}
+			flag=1;
 		if(board[3]==board[5] && board[5]==board[7]&&(board[3]==playerLetter||board[3]==computerLetter))
-		{
-			if(board[3]==playerLetter)
-				System.out.println("Player won with letter:"+playerLetter);
-			else
-				System.out.println("Computer won with lettter:"+computerLetter);
-			System.exit(0);
-		}
+			flag=1;
 		if(board[4]==board[5] && board[5]==board[6]&&(board[4]==playerLetter||board[4]==computerLetter))
-		{
-			if(board[4]==playerLetter)
-				System.out.println("Player won with letter:"+playerLetter);
-			else
-				System.out.println("Computer won with lettter:"+computerLetter);
-			System.exit(0);
-		}
+			flag=1;
 		if(board[7]==board[8] && board[8]==board[9]&&(board[7]==playerLetter||board[7]==computerLetter))
+			flag=1;
+		if(flag==1)
 		{
-			if(board[7]==playerLetter)
+			if(insertLetter==playerLetter)
+			{
 				System.out.println("Player won with letter:"+playerLetter);
+				System.exit(0);
+			}
 			else
-				System.out.println("Computer won with lettter:"+computerLetter);
-			System.exit(0);
+			{
+				System.out.println("Computer won with letter:"+computerLetter);
+				System.exit(0);
+			}
 		}
 	}
 	
