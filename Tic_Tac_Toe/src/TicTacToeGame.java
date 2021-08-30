@@ -292,6 +292,11 @@ public class TicTacToeGame
 				return move;
 			}
 		}
+		if(board[5]==' ')//To check whether center is available
+		{
+			move=5;
+			return move;
+		}
 		return 0;
 	}
 	
