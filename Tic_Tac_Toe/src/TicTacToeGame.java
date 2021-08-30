@@ -202,7 +202,6 @@ public class TicTacToeGame
 	 */
 	int checkComputerWinning()
 	{
-		//computerFlag=0;
 		if(board[1]==computerLetter)
 		{
 			if(board[1]==board[2])
@@ -273,7 +272,8 @@ public class TicTacToeGame
 		else if(board[8]==computerLetter && board[8]==board[9])
 			computerFlag=7;
 		
-		if(computerFlag!=0)//Here it is checking whether the winning cell is empty or not..., if it is empty then return that position or else 0
+		//Here it is checking whether the winning cell is empty or not..., if it is empty then return that position or else 0
+		if(computerFlag!=0)
 			if(board[computerFlag]!=playerLetter)
 				return computerFlag;
 		return 0;
