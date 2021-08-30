@@ -209,8 +209,8 @@ public class TicTacToeGame
 		}
 	}
 	
-	/* Computer to play like me and finding whether he can win in next move or not
-	 * if yes then it will try to move in the letter in that cell
+	/* Computer to play like me and finding whether he can win in it's current move 
+	 * or not if yes then it will try to move in the letter in that cell
 	 */
 	int checkComputerWinning()
 	{
