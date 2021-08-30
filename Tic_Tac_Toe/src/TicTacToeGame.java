@@ -3,7 +3,9 @@ public class TicTacToeGame
 {
 	/* move variable used to locate the cell in the board 
 	 * and count to track whether all cells are filled or 
-	 * not
+	 * not and computerFlag initialized to 0 for first random moves
+	 * then it is used to check whether the computer can win or not
+	 * in it's current move
 	 */
 	int computerFlag=0;
 	Random rand=new Random();
@@ -69,16 +71,16 @@ public class TicTacToeGame
 				/* Here computer gets a randomly generated number in 
 				 * between 1 to 9 where 9 is maximum and 1 is minimum in the range
 				 */
-				int computerFlag=checkComputerWinning();
-				if(computerFlag==0)
+				computerFlag=checkComputerWinning();
+				if(computerFlag!=0)
 				{
-					move=(int)((Math.random()*(9 - 1)) + 1);
-					System.out.println("Computer randomly choses to cell number:"+move);
+					move=computerFlag;
+					System.out.println("Computer:Haha got you as I am intelligent i will choose to insert letter at move:"+move+" to win the game.");
 				}
 				else
 				{
-					move=computerFlag;
-					System.out.println("Computer choses move:"+move+" to win game.");
+					move=(int)((Math.random()*(9 - 1)) + 1);
+					System.out.println("Computer randomly choses to cell number:"+move);
 				}
 			}
 			if(move>0 && move<(board.length))/*The board value will range in between 1 to N-1 where here the N is 10*/
@@ -200,7 +202,7 @@ public class TicTacToeGame
 	 */
 	int checkComputerWinning()
 	{
-		int computerFlag=0;
+		//computerFlag=0;
 		if(board[1]==computerLetter)
 		{
 			if(board[1]==board[2])
@@ -216,7 +218,7 @@ public class TicTacToeGame
 			if(board[1]==board[9])
 				computerFlag=5;
 		}
-		if(board[2]==computerLetter)
+		else if(board[2]==computerLetter)
 		{
 			if(board[2]==board[3])
 				computerFlag=1;
@@ -225,7 +227,7 @@ public class TicTacToeGame
 			if(board[2]==board[8])
 				computerFlag=5;
 		}
-		if(board[3]==computerLetter)
+		else if(board[3]==computerLetter)
 		{
 			if(board[3]==board[5])
 				computerFlag=7;
@@ -236,7 +238,7 @@ public class TicTacToeGame
 			if(board[3]==board[9])
 				computerFlag=6;
 		}
-		if(board[4]==computerLetter)
+		else if(board[4]==computerLetter)
 		{
 			if(board[4]==board[5])
 				computerFlag=6;
@@ -245,7 +247,7 @@ public class TicTacToeGame
 			if(board[4]==board[7])
 				computerFlag=1;
 		}
-		if(board[5]==computerLetter)
+		else if(board[5]==computerLetter)
 		{
 			if(board[5]==board[6])
 				computerFlag=4;
@@ -256,22 +258,22 @@ public class TicTacToeGame
 			if(board[5]==board[9])
 				computerFlag=1;
 		}
-		if(board[6]==computerLetter)
+		else if(board[6]==computerLetter)
 		{
 			if(board[6]==board[9])
 				computerFlag=3;
 		}
-		if(board[7]==computerLetter)
+		else if(board[7]==computerLetter)
 		{
 			if(board[7]==board[8])
 				computerFlag=9;
 			if(board[7]==board[9])
 				computerFlag=8;
 		}
-		if(board[8]==computerLetter && board[8]==board[9])
+		else if(board[8]==computerLetter && board[8]==board[9])
 			computerFlag=7;
 		
-		if(computerFlag!=0)
+		if(computerFlag!=0)//Here it is checking whether the winning cell is empty or not..., if it is empty then return that position or else 0
 			if(board[computerFlag]!=playerLetter)
 				return computerFlag;
 		return 0;
