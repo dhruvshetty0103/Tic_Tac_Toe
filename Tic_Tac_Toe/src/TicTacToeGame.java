@@ -108,7 +108,11 @@ public class TicTacToeGame
 			/*Use case for to check that did anyone won for not */
 			checkWinning();
 		}
-		if(count==9)//In course of game Tie the count reaches the limit 9 as all cells are filled up
+		/* In course of game Tie the count reaches the limit 9 
+		 * as all cells are filled up and this count will set that 
+		 * game should end when board filled up
+		 */
+		if(count==9)
 			System.out.println("Board is full so game is Tie!");
 	}
 	
