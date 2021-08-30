@@ -74,7 +74,7 @@ public class TicTacToeGame
 					move=computerFlag;
 					System.out.println("Computer:Haha got you as I am intelligent i will choose to insert letter at move:"+move+" to win the game.");
 				}
-				else if(computerFlag==0)
+				else
 				{
 					int blockPlayerWin=blockPlayerWinning();
 					computerFlag=blockPlayerWin;
@@ -84,8 +84,12 @@ public class TicTacToeGame
 						/* Here computer gets a randomly generated number in 
 						 * between 1 to 9 where 9 is maximum and 1 is minimum in the range
 						 */
-						move=(int)((Math.random()*(10 - 1)) + 1);
-						System.out.println("Computer randomly choses to cell number:"+move);
+						int flag=checkCorners();
+						if(flag==0)//When corners will be finished then it will generate random cell numbers
+						{
+							move=(int)((Math.random()*(10 - 1)) + 1);
+							System.out.println("Computer randomly choses to cell number:"+move);
+						}
 					}
 					else
 					{
@@ -273,6 +277,23 @@ public class TicTacToeGame
 		return 0;
 	}
 	
+	/* This method will check if no one is winning then take corners
+	 * to have a advantage to win the game...it is done by checking empty
+	 * corner if exists then insert letter there
+	 */
+	int checkCorners()
+	{
+		int corner[]= {1,3,7,9};
+		for(int i=0;i<4;i++)
+		{
+			if(board[corner[i]]==' ')
+			{
+				move=corner[i];
+				return move;
+			}
+		}
+		return 0;
+	}
 	
 	public static void main(String[] args) 
 	{
