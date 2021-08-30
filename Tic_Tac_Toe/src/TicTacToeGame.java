@@ -53,6 +53,7 @@ public class TicTacToeGame
 			System.out.println(board[i]+"|"+board[i+1]+"|"+board[i+2]);/*This will help us to iterate all elements in a current row*/
 			System.out.println("-+-+-");
 		}
+		System.out.println();
 	}
 	
 	/*Displaying whether the desired location or index exists on board*/
@@ -67,20 +68,30 @@ public class TicTacToeGame
 			}
 			else
 			{
-				
-				/* Here computer gets a randomly generated number in 
-				 * between 1 to 9 where 9 is maximum and 1 is minimum in the range
-				 */
 				computerFlag=checkComputerWinning();
 				if(computerFlag!=0)
 				{
 					move=computerFlag;
 					System.out.println("Computer:Haha got you as I am intelligent i will choose to insert letter at move:"+move+" to win the game.");
 				}
-				else
+				else if(computerFlag==0)
 				{
-					move=(int)((Math.random()*(9 - 1)) + 1);
-					System.out.println("Computer randomly choses to cell number:"+move);
+					int blockPlayerWin=blockPlayerWinning();
+					computerFlag=blockPlayerWin;
+					if(computerFlag==0)
+					{
+
+						/* Here computer gets a randomly generated number in 
+						 * between 1 to 9 where 9 is maximum and 1 is minimum in the range
+						 */
+						move=(int)((Math.random()*(10 - 1)) + 1);
+						System.out.println("Computer randomly choses to cell number:"+move);
+					}
+					else
+					{
+						move=computerFlag;
+						System.out.println("Blocked player chance of winning by inserting letter at:"+move);
+					}
 				}
 			}
 			if(move>0 && move<(board.length))/*The board value will range in between 1 to N-1 where here the N is 10*/
@@ -113,6 +124,7 @@ public class TicTacToeGame
 			else
 			{
 				insertLetter=computerLetter;
+				computerFlag=0;//Setting it to zero so that previous buffer is cleared if any exists
 				turn="Player";//Setting next turn to player
 			}
 			System.out.println("Free space available");
@@ -202,82 +214,65 @@ public class TicTacToeGame
 	 */
 	int checkComputerWinning()
 	{
-		if(board[1]==computerLetter)
-		{
-			if(board[1]==board[2])
-				computerFlag=3;
-			if(board[1]==board[3])
-				computerFlag=2;
-			if(board[1]==board[4])
-				computerFlag=7;
-			if(board[1]==board[7])
-				computerFlag=4;
-			if(board[1]==board[5])
-				computerFlag=9;
-			if(board[1]==board[9])
-				computerFlag=5;
-		}
-		else if(board[2]==computerLetter)
-		{
-			if(board[2]==board[3])
-				computerFlag=1;
-			if(board[2]==board[5])
-				computerFlag=8;
-			if(board[2]==board[8])
-				computerFlag=5;
-		}
-		else if(board[3]==computerLetter)
-		{
-			if(board[3]==board[5])
-				computerFlag=7;
-			if(board[3]==board[7])
-				computerFlag=5;
-			if(board[3]==board[6])
-				computerFlag=9;
-			if(board[3]==board[9])
-				computerFlag=6;
-		}
-		else if(board[4]==computerLetter)
-		{
-			if(board[4]==board[5])
-				computerFlag=6;
-			if(board[4]==board[6])
-				computerFlag=5;
-			if(board[4]==board[7])
-				computerFlag=1;
-		}
-		else if(board[5]==computerLetter)
-		{
-			if(board[5]==board[6])
-				computerFlag=4;
-			if(board[5]==board[7])
-				computerFlag=3;
-			if(board[5]==board[8])
-				computerFlag=2;
-			if(board[5]==board[9])
-				computerFlag=1;
-		}
-		else if(board[6]==computerLetter)
-		{
-			if(board[6]==board[9])
-				computerFlag=3;
-		}
-		else if(board[7]==computerLetter)
-		{
-			if(board[7]==board[8])
-				computerFlag=9;
-			if(board[7]==board[9])
-				computerFlag=8;
-		}
-		else if(board[8]==computerLetter && board[8]==board[9])
+		if(board[1]==' '  && ((board[2]==board[3] && board[2]==computerLetter)||(board[4]==board[7] && board[4]==computerLetter)||(board[5]==board[9] && board[5]==computerLetter)))
+			computerFlag=1;
+		if(board[2]==' '  && ((board[1]==board[3] && board[1]==computerLetter)||(board[5]==board[8] && board[5]==computerLetter)))
+			computerFlag=2;
+		if(board[3]==' '  && ((board[1]==board[2] && board[1]==computerLetter)||(board[5]==board[7] && board[5]==computerLetter)||(board[6]==board[9] && board[6]==computerLetter)))
+			computerFlag=3;
+		if(board[4]==' '  && ((board[1]==board[7] && board[1]==computerLetter)||(board[5]==board[6] && board[5]==computerLetter)))
+			computerFlag=4;
+		if(board[5]==' '  && ((board[2]==board[8] && board[2]==computerLetter)||(board[4]==board[6] && board[4]==computerLetter)))
+			computerFlag=5;
+		if(board[6]==' '  && ((board[3]==board[9] && board[3]==computerLetter)||(board[4]==board[5] && board[4]==computerLetter)))
+			computerFlag=6;
+		if(board[7]==' '  && ((board[1]==board[4] && board[1]==computerLetter)||(board[3]==board[5] && board[3]==computerLetter)||(board[8]==board[9] && board[8]==computerLetter)))
 			computerFlag=7;
+		if(board[8]==' '  && ((board[2]==board[5] && board[2]==computerLetter)||(board[7]==board[9] && board[7]==computerLetter)))
+			computerFlag=8;
+		if(board[9]==' '  && ((board[1]==board[5] && board[1]==computerLetter)||(board[3]==board[6] && board[3]==computerLetter)||(board[7]==board[8] && board[7]==computerLetter)))
+			computerFlag=9;
 		
 		//Here it is checking whether the winning cell is empty or not..., if it is empty then return that position or else 0
 		if(computerFlag!=0)
-			if(board[computerFlag]!=playerLetter)
+			if(board[computerFlag]==' ')
 				return computerFlag;
 		return 0;
 	}
+	
+	/* Computer to play like me and finding whether I can win in next move or not
+	 * if yes then it will try to insert the letter in that cell so we will check it
+	 * for all nine cells and their winning combination to block it
+	 */
+	
+	int blockPlayerWinning()
+	{
+		if(board[1]==' '  && ((board[2]==board[3] && board[2]==playerLetter)||(board[4]==board[7] && board[4]==playerLetter)||(board[5]==board[9] && board[5]==playerLetter)))
+			computerFlag=1;
+		if(board[2]==' '  && ((board[1]==board[3] && board[1]==playerLetter)||(board[5]==board[8] && board[5]==playerLetter)))
+			computerFlag=2;
+		if(board[3]==' '  && ((board[1]==board[2] && board[1]==playerLetter)||(board[5]==board[7] && board[5]==playerLetter)||(board[6]==board[9] && board[6]==playerLetter)))
+			computerFlag=3;
+		if(board[4]==' '  && ((board[1]==board[7] && board[1]==playerLetter)||(board[5]==board[6] && board[5]==playerLetter)))
+			computerFlag=4;
+		if(board[5]==' '  && ((board[2]==board[8] && board[2]==playerLetter)||(board[4]==board[6] && board[4]==playerLetter)))
+			computerFlag=5;
+		if(board[6]==' '  && ((board[3]==board[9] && board[3]==playerLetter)||(board[4]==board[5] && board[4]==playerLetter)))
+			computerFlag=6;
+		if(board[7]==' '  && ((board[1]==board[4] && board[1]==playerLetter)||(board[3]==board[5] && board[3]==playerLetter)||(board[8]==board[9] && board[8]==playerLetter)))
+			computerFlag=7;
+		if(board[8]==' '  && ((board[2]==board[5] && board[2]==playerLetter)||(board[7]==board[9] && board[7]==playerLetter)))
+			computerFlag=8;
+		if(board[9]==' '  && ((board[1]==board[5] && board[1]==playerLetter)||(board[3]==board[6] && board[3]==playerLetter)||(board[7]==board[8] && board[7]==playerLetter)))
+			computerFlag=9;
+		
+		//Here it is checking whether the winning cell is empty or not..., if it is empty then return that position or else 0
+		if(computerFlag!=0)
+			if(board[computerFlag]==' ')
+				return computerFlag;
+		return 0;
+	}
+	
 	
 	public static void main(String[] args) 
 	{
