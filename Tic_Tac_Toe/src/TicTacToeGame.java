@@ -1,27 +1,28 @@
 import java.util.*;
 public class TicTacToeGame 
 {
+	/* move variable used to locate the cell in the board 
+	 * and count to track whether all cells are filled or 
+	 * not
+	 */
+	int computerFlag=0;
 	Random rand=new Random();
 	String turn="";
 	public static char [] board=new char[10];
 	char computerLetter,playerLetter,insertLetter;
 	int i,move=0,count=0;
-	/*move variable used to locate the cell in the board 
-	 * and count to track whether all cells are filled or 
-	 * not
-	 */
 	Scanner reader=new Scanner(System.in);
 	
-	
-	void initialize()/*To initialize the game board*/
+	/*To initialize the game board*/
+	void initialize()
 	{
 		System.out.println("Welcome to TicTacToe");
 		for(i=1;i<board.length;i++)
 			board[i]=' ';
 	}
 	
-	
-	void choose_Letter()/*Function to assign letter to player and computer*/
+	/*Function to assign letter to player and computer*/
+	void choose_Letter()
 	{
 		System.out.println("Choose letter X or O for player");
 		
@@ -42,8 +43,8 @@ public class TicTacToeGame
 		
 	}
 	
-	
-	void showBoard()/*Displaying current board*/
+	/*Displaying current board*/
+	void showBoard()
 	{
 		for(i=1;i<board.length;i=i+3)//Taking a length and adding 3 to i value display NxN matrix
 		{
@@ -52,8 +53,8 @@ public class TicTacToeGame
 		}
 	}
 	
-	
-	void selectDesiredLocation()/*Displaying whether the desired location or index exists on board*/
+	/*Displaying whether the desired location or index exists on board*/
+	void selectDesiredLocation()
 	{
 		while(count<9)
 		{
@@ -64,11 +65,21 @@ public class TicTacToeGame
 			}
 			else
 			{
-				move=(int)((Math.random()*(9 - 1)) + 1);
-				/*Here computer gets a randomly generated number in 
+				
+				/* Here computer gets a randomly generated number in 
 				 * between 1 to 9 where 9 is maximum and 1 is minimum in the range
 				 */
-				System.out.println("Computer randomly choses to cell number:"+move);
+				int computerFlag=checkComputerWinning();
+				if(computerFlag==0)
+				{
+					move=(int)((Math.random()*(9 - 1)) + 1);
+					System.out.println("Computer randomly choses to cell number:"+move);
+				}
+				else
+				{
+					move=computerFlag;
+					System.out.println("Computer choses move:"+move+" to win game.");
+				}
 			}
 			if(move>0 && move<(board.length))/*The board value will range in between 1 to N-1 where here the N is 10*/
 			{
@@ -84,8 +95,8 @@ public class TicTacToeGame
 			System.out.println("Board is full so game is Tie!");
 	}
 	
-	
-	void availableSpace(int location)/*Where free space is available insert letter*/
+	/*Where free space is available insert letter*/
+	void availableSpace(int location)
 	{
 		if(board[location]!='X' && board[location]!='O')//When these spaces are not occupied by any letter
 		{
@@ -108,11 +119,14 @@ public class TicTacToeGame
 			showBoard();/*Showing board to check whether it is working or not*/
 		}
 		else
+		{
 			System.out.println("Free space not available");
+			move=0;
+		}
 	}
 	
-	
-	void toss()/*Toss function to decide who will go first */
+	/*Toss function to decide who will go first */
+	void toss()
 	{
 		System.out.println("Choose the side of the coin for toss\nEnter\n0.Heads\n1.Tails");
 		int sideSelection=reader.nextInt();//Reading player choice for coin side
@@ -128,6 +142,8 @@ public class TicTacToeGame
 			turn="Computer";
 		}
 	}
+	
+	
 	/*We know pattern of winning are as follows if they have
 	 * same letters at following indices 
 	 * 123
@@ -147,22 +163,23 @@ public class TicTacToeGame
 	void checkWinning()
 	{
 		int flag=0;
-		if(board[1]==board[2] && board[2]==board[3] &&(board[1]==playerLetter||board[1]==computerLetter) )
+		if(board[1]==board[2] && board[2]==board[3] && (board[1]==playerLetter||board[1]==computerLetter))
 			flag=1;
-		if(board[1]==board[4] && board[4]==board[7] &&(board[1]==playerLetter||board[1]==computerLetter))
+		if(board[1]==board[4] && board[4]==board[7] && (board[1]==playerLetter||board[1]==computerLetter))
 			flag=1;
-		if(board[1]==board[5] && board[5]==board[9] &&(board[1]==playerLetter||board[1]==computerLetter))
+		if(board[1]==board[5] && board[5]==board[9] && (board[1]==playerLetter||board[1]==computerLetter))
 			flag=1;
-		if(board[2]==board[5] && board[5]==board[8] &&(board[2]==playerLetter||board[2]==computerLetter))
+		if(board[2]==board[5] && board[5]==board[8] && (board[2]==playerLetter||board[2]==computerLetter))
 			flag=1;
-		if(board[3]==board[6] && board[6]==board[9]&&(board[3]==playerLetter||board[3]==computerLetter))
+		if(board[3]==board[6] && board[6]==board[9] && (board[3]==playerLetter||board[3]==computerLetter))
 			flag=1;
-		if(board[3]==board[5] && board[5]==board[7]&&(board[3]==playerLetter||board[3]==computerLetter))
+		if(board[3]==board[5] && board[5]==board[7] && (board[3]==playerLetter||board[3]==computerLetter))
 			flag=1;
-		if(board[4]==board[5] && board[5]==board[6]&&(board[4]==playerLetter||board[4]==computerLetter))
+		if(board[4]==board[5] && board[5]==board[6] && (board[4]==playerLetter||board[4]==computerLetter))
 			flag=1;
-		if(board[7]==board[8] && board[8]==board[9]&&(board[7]==playerLetter||board[7]==computerLetter))
+		if(board[7]==board[8] && board[8]==board[9] && (board[7]==playerLetter||board[7]==computerLetter))
 			flag=1;
+		
 		if(flag==1)
 		{
 			if(insertLetter==playerLetter)
@@ -176,6 +193,88 @@ public class TicTacToeGame
 				System.exit(0);
 			}
 		}
+	}
+	
+	/* Computer to play like me and finding whether he can win in next move or not
+	 * if yes then it will try to move in the letter in that cell
+	 */
+	int checkComputerWinning()
+	{
+		int computerFlag=0;
+		if(board[1]==computerLetter)
+		{
+			if(board[1]==board[2])
+				computerFlag=3;
+			if(board[1]==board[3])
+				computerFlag=2;
+			if(board[1]==board[4])
+				computerFlag=7;
+			if(board[1]==board[7])
+				computerFlag=4;
+			if(board[1]==board[5])
+				computerFlag=9;
+			if(board[1]==board[9])
+				computerFlag=5;
+		}
+		if(board[2]==computerLetter)
+		{
+			if(board[2]==board[3])
+				computerFlag=1;
+			if(board[2]==board[5])
+				computerFlag=8;
+			if(board[2]==board[8])
+				computerFlag=5;
+		}
+		if(board[3]==computerLetter)
+		{
+			if(board[3]==board[5])
+				computerFlag=7;
+			if(board[3]==board[7])
+				computerFlag=5;
+			if(board[3]==board[6])
+				computerFlag=9;
+			if(board[3]==board[9])
+				computerFlag=6;
+		}
+		if(board[4]==computerLetter)
+		{
+			if(board[4]==board[5])
+				computerFlag=6;
+			if(board[4]==board[6])
+				computerFlag=5;
+			if(board[4]==board[7])
+				computerFlag=1;
+		}
+		if(board[5]==computerLetter)
+		{
+			if(board[5]==board[6])
+				computerFlag=4;
+			if(board[5]==board[7])
+				computerFlag=3;
+			if(board[5]==board[8])
+				computerFlag=2;
+			if(board[5]==board[9])
+				computerFlag=1;
+		}
+		if(board[6]==computerLetter)
+		{
+			if(board[6]==board[9])
+				computerFlag=3;
+		}
+		if(board[7]==computerLetter)
+		{
+			if(board[7]==board[8])
+				computerFlag=9;
+			if(board[7]==board[9])
+				computerFlag=8;
+		}
+		if(board[8]==computerLetter && board[8]==board[9])
+			computerFlag=7;
+		
+		if(computerFlag!=0)
+			if(board[computerFlag]!=playerLetter)
+				return computerFlag;
+		return 0;
 	}
 	
 	public static void main(String[] args) 
